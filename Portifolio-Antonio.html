@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Antônio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00bf8f;
+            --secondary-color: #001510;
+            --accent-color: #7ee8fa;
+            --text-color: #e4e4e4;
+            --bg-color: #0a192f;
+            /* Definindo tamanhos base */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-xxl: 3rem;
+            /* Definindo tamanhos de fonte */
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 2rem;
+            --text-4xl: 2.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .tech-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: -1;
+            background: 
+                linear-gradient(90deg, var(--primary-color) 1px, transparent 1px),
+                linear-gradient(var(--primary-color) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, var(--primary-color) 1px, transparent 1px);
+            background-size: 50px 50px, 50px 50px, 100px 100px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { 
+                background-position: 0 0, 0 0, 0 0;
+                opacity: 0.03;
+            }
+            50% {
+                opacity: 0.07;
+            }
+            100% { 
+                background-position: 50px 0, 0 50px, 100px 100px;
+                opacity: 0.03;
+            }
+        }
+
+        .tracking-points {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .tracking-point {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: trackingPoint 4s infinite;
+        }
+
+        @keyframes trackingPoint {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.5;
+            }
+            80% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(100px, 100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+            position: relative;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--bg-color));
+            padding: var(--spacing-xxl) 0 var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-image {
+            width: 9.375rem;
+            height: 9.375rem;
+            border-radius: 50%;
+            border: 0.1875rem solid var(--primary-color);
+            padding: var(--spacing-xs);
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+            display: block;
+            margin: 0 auto var(--spacing-xl);
+        }
+
+        .profile-image::after {
+            content: '';
+            position: absolute;
+            top: -0.625rem;
+            left: -0.625rem;
+            right: -0.625rem;
+            bottom: -0.625rem;
+            border: 0.125rem solid var(--primary-color);
+            border-radius: 50%;
+            animation: pulseCircle 2s infinite;
+        }
+
+        @keyframes pulseCircle {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+
+        .profile-title {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .profile-subtitle {
+            font-size: var(--text-xl);
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section {
+            padding: var(--spacing-xxl) 0;
+            background: rgba(10, 25, 47, 0.7);
+            margin: var(--spacing-xl) 0;
+            border-radius: 1.25rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(126, 232, 250, 0.1);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+            font-size: var(--text-3xl);
+            position: relative;
+            display: block;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.625rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 0.125rem;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            padding: var(--spacing-lg);
+        }
+
+        .skill-card {
+            background: rgba(0, 31, 63, 0.6);
+            padding: var(--spacing-xl);
+            border-radius: 1.25rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                                      rgba(126, 232, 250, 0.1) 0%,
+                                      transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-icon {
+            font-size: var(--text-4xl);
+            margin-bottom: var(--spacing-lg);
+            color: var(--primary-color);
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--text-xl);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .project-card {
+            background: rgba(0, 31, 63, 0.6);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0, 191, 143, 0.1),
+                rgba(126, 232, 250, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 12.5rem;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(126, 232, 250, 0.1);
+        }
+
+        .project-info {
+            padding: var(--spacing-xl);
+        }
+
+        .project-info h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--text-xl);
+        }
+
+        .tech-tag {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            margin: var(--spacing-xs);
+            background: rgba(126, 232, 250, 0.1);
+            border-radius: 1rem;
+            font-size: var(--text-sm);
+            color: var(--accent-color);
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 191, 143, 0.2);
+        }
+
+        .contact a i {
+            margin-right: var(--spacing-sm);
+        }
+
+        footer {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+            background: var(--secondary-color);
+            color: var(--text-color);
+            position: relative;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+
+            .projects {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .profile-title {
+                font-size: 3em;
+            }
+
+            .profile-subtitle {
+                font-size: 1.2em;
+            }
+
+            .section {
+                padding: 60px 20px;
+                margin: 30px 0;
+            }
+
+            .skills {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 100px 0 70px;
+            }
+
+            .profile-title {
+                font-size: 2.5em;
+            }
+
+            .profile-subtitle {
+                font-size: 1.1em;
+                padding: 0 20px;
+            }
+            
+            .section {
+                padding: 40px 15px;
+                margin: 20px 0;
+            }
+
+            .section h2 {
+                font-size: 1.8em;
+            }
+
+            .skills {
+                padding: 10px;
+            }
+
+            .skill-card {
+                padding: 20px;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 10px;
+            }
+
+            .project-card {
+                max-width: 100%;
+            }
+
+            .project-image {
+                height: 180px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .contact a {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .tech-tags {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .tech-tag {
+                margin: 2px;
+            }
+
+            :root {
+                /* Reduzindo tamanhos para telas menores */
+                --spacing-xl: 1.25rem;
+                --spacing-xxl: 2rem;
+                --text-4xl: 2rem;
+                --text-3xl: 1.75rem;
+                --text-2xl: 1.5rem;
+                --text-xl: 1.25rem;
+            }
+
+            .profile-image {
+                width: 7.5rem;
+                height: 7.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-title {
+                font-size: 2em;
+            }
+
+            .profile-subtitle {
+                font-size: 1em;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+
+            .skill-card {
+                padding: 15px;
+            }
+
+            .skill-icon {
+                font-size: 2em;
+            }
+
+            .project-info {
+                padding: 20px;
+            }
+
+            .project-info h3 {
+                font-size: 1.3em;
+            }
+
+            .tech-tag {
+                font-size: 0.8em;
+                padding: 4px 8px;
+            }
+
+            :root {
+                /* Reduzindo ainda mais para telas muito pequenas */
+                --spacing-xl: 1rem;
+                --spacing-xxl: 1.5rem;
+                --text-4xl: 1.75rem;
+                --text-3xl: 1.5rem;
+                --text-2xl: 1.25rem;
+                --text-xl: 1.125rem;
+            }
+        }
+
+        .section h2 {
+            width: 100%;
+            transform: none;
+            left: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skill-card, .project-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .skill-card {
+            justify-content: flex-start;
+        }
+
+        .tech-tags {
+            margin-top: auto;
+            padding-top: 15px;
+        }
+
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-info p {
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .container {
+            padding: 0 max(20px, 5%);
+        }
+
+        @media (hover: hover) {
+            .skill-card:hover,
+            .project-card:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (hover: none) {
+            .skill-card::before,
+            .project-card::before {
+                display: none;
+            }
+        }
+
+        .tech-grid {
+            will-change: background-position;
+        }
+
+        .profile-image::after {
+            will-change: transform, opacity;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        .tech-tag {
+            line-height: 1.4;
+        }
+
+        /* Estilos para o detector de cursor */
+        .cursor-detector {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .cursor-detector.active {
+            opacity: 1;
+        }
+
+        .cursor-box {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-label {
+            position: absolute;
+            top: -25px;
+            left: -25px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .cursor-box::before,
+        .cursor-box::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        .cursor-box::before {
+            top: -4px;
+            left: -4px;
+        }
+
+        .cursor-box::after {
+            bottom: -4px;
+            right: -4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-grid"></div>
+    <div class="tracking-points">
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+        <div class="tracking-point"></div>
+    </div>
+    <div class="cursor-detector">
+        <div class="cursor-box"></div>
+        <div class="cursor-label">cursor: 100%</div>
+    </div>
+    <header>
+        <div class="container header-content">
+            <img src="perfil.jpeg" alt="" class="profile-image">
+            <h1 class="profile-title">Antônio</h1>
+            <p class="profile-subtitle">Especialista em Visão Computacional | Análise de Dados</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2>Sobre Mim</h2>
+            <p style="padding: 0 20px; text-align: center; max-width: 800px; margin: 0 auto;">
+                Sou um profissional apaixonado por visão computacional e análise de dados, 
+                focado no desenvolvimento de soluções inovadoras utilizando tecnologias de ponta. 
+                Minha experiência abrange desde o processamento avançado de imagens até a 
+                implementação de modelos de deep learning para resolver desafios complexos.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Habilidades</h2>
+            <div class="skills">
+                <div class="skill-card">
+                    <i class="fas fa-brain skill-icon"></i>
+                    <h3>Visão Computacional</h3>
+                    <p>OpenCV • TensorFlow • PyTorch • YOLO</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Detecção de Objetos</span>
+                        <span class="tech-tag">Deep Learning</span>
+                        <span class="tech-tag">CNN</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code skill-icon"></i>
+                    <h3>Desenvolvimento</h3>
+                    <p>Python • SQL • Git</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Automação</span>
+                        <span class="tech-tag">Scripts</span>
+                        <span class="tech-tag">Versionamento</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-chart-network skill-icon"></i>
+                    <h3>Análise de Dados</h3>
+                    <p>Pandas • NumPy • Scikit-learn • Matplotlib</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">ETL</span>
+                        <span class="tech-tag">BI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Projetos</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <img src="detection.png" alt="Projeto de Visão Computacional - Detecção de Objetos" class="project-image">
+                    <div class="project-info">
+                        <h3>Sistema de Visão Computacional</h3>
+                        <p>Sistema de detecção e reconhecimento de padrões em tempo real utilizando deep learning e processamento de imagens avançado.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">YOLO</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="data-viz.png" alt="Projeto de Análise de Dados - Dashboard" class="project-image">
+                    <div class="project-info">
+                        <h3>Pipeline de Análise de Dados</h3>
+                        <p>Desenvolvimento de pipeline automatizado para processamento e análise de grandes volumes de dados, com geração de insights em tempo real.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section contact">
+            <h2>Contato</h2>
+            <div class="contact-links">
+                <a href="mailto:tonibmartins@gmail.com"><i class="fas fa-envelope"></i>Email</a>
+                <a href="https://linkedin.com/in/antmatins" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a>
+                <a href="https://github.com/tonibmartins" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Antônio | Especialista em Visão Computacional & Análise de Dados</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / card.clientWidth) * 100;
+                const y = ((e.clientY - rect.top) / card.clientHeight) * 100;
+                card.style.setProperty('--mouse-x', `${x}%`);
+                card.style.setProperty('--mouse-y', `${y}%`);
+            });
+        });
+
+        // Animação dos pontos de rastreamento
+        const trackingPoints = document.querySelectorAll('.tracking-point');
+        
+        function initializePoint(point) {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const targetX = Math.random() * window.innerWidth;
+            const targetY = Math.random() * window.innerHeight;
+            
+            point.style.left = `${x}px`;
+            point.style.top = `${y}px`;
+            point.style.transform = `translate(0, 0)`;
+            
+            const duration = 3000 + Math.random() * 2000;
+            const delay = Math.random() * 2000;
+            
+            point.style.animation = 'none';
+            point.offsetHeight; // Força reflow
+            point.style.animation = `trackingPoint ${duration}ms ${delay}ms infinite`;
+            point.style.setProperty('--target-x', `${targetX - x}px`);
+            point.style.setProperty('--target-y', `${targetY - y}px`);
+        }
+
+        trackingPoints.forEach(point => {
+            initializePoint(point);
+            setInterval(() => initializePoint(point), 5000);
+        });
+
+        window.addEventListener('resize', () => {
+            trackingPoints.forEach(initializePoint);
+        });
+
+        // Detector de cursor
+        const cursorDetector = document.querySelector('.cursor-detector');
+        let mouseTimer;
+        let isMouseMoving = true;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorDetector.style.display = 'block';
+            cursorDetector.style.left = e.clientX + 'px';
+            cursorDetector.style.top = e.clientY + 'px';
+            
+            isMouseMoving = true;
+            cursorDetector.classList.remove('active');
+            clearTimeout(mouseTimer);
+            
+            mouseTimer = setTimeout(() => {
+                isMouseMoving = false;
+                cursorDetector.classList.add('active');
+                const confidence = Math.floor(Math.random() * 5 + 95); // 95-100%
+                cursorDetector.querySelector('.cursor-label').textContent = `cursor: ${confidence}%`;
+            }, 3000); // Alterado para 3 segundos
+        });
+
+        // Esconder o detector quando o mouse sair da janela
+        document.addEventListener('mouseleave', () => {
+            cursorDetector.classList.remove('active');
+            clearTimeout(mouseTimer);
+        });
+
+        // Animação suave da caixa do cursor
+        function animateCursorBox() {
+            if (!isMouseMoving) {
+                const box = cursorDetector.querySelector('.cursor-box');
+                const scale = 1 + Math.sin(Date.now() / 500) * 0.1;
+                box.style.transform = `translate(-50%, -50%) scale(${scale})`;
+            }
+            requestAnimationFrame(animateCursorBox);
+        }
+        animateCursorBox();
+    </script>
+</body>
+</html>
